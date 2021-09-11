@@ -1,5 +1,5 @@
 {
-  "name": "slave-bot",
+  "name": "le-robot",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -13,5 +13,14 @@
     "@discordjs/rest": "^0.1.0-canary.0",
     "discord-api-types": "^0.23.1",
     "discord.js": "^13.1.0"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tomleblais/le-robot.git"
+  },
+  "bugs": {
+    "url": "https://github.com/tomleblais/le-robot/issues"
+  },
+  "homepage": "https://github.com/tomleblais/le-robot#readme"
 }
