@@ -1,8 +1,8 @@
 const { Client, Intents, Collection } = require('discord.js')
 const fs = require("fs")
 
-const Util = require("./src/util")
-const { PermissionCommandError } = require("./src/errors")
+const Util = require("./lib/util")
+const { PermissionCommandError } = require("./lib/errors")
 
 const { prefix, token } = require('./config.json')
 
