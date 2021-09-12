@@ -10,14 +10,14 @@ const { prefix, token } = require('./config.json')
 const client = new Client({ intents: [
 	Intents.FLAGS.GUILDS,
 	Intents.FLAGS.GUILD_MESSAGES,
-	Intents.FLAGS.DIRECT_MESSAGES]
-})
+	Intents.FLAGS.DIRECT_MESSAGES
+]})
 
 client.features = new Map()
 
 // Quand le client est prêt ...
 client.once('ready', () => {
-	console.log(`Logged in at ${client.user.tag}`)
+	console.log(`Logged in as ${client.user.tag}`)
 	// Initialisation des features
 	const featuresFolders = fs.readdirSync("./features/").filter((file) => !file.includes("."))
 	for (const featureName of featuresFolders) {
