@@ -36,7 +36,7 @@ client.on("messageCreate", (msg) => {
 	if (msg.author.id == client.user.id)
 		return
 	// Match features
-	client.features.get("match").each((match) => {
+	client.features.get("matches").each((match) => {
 		if (match.filter && msg.content.match(match.filter)) {
 			if (!match.disabled)
 				match.execute(client, msg)
