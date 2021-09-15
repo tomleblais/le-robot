@@ -1,4 +1,7 @@
 const { Client, Intents, Collection } = require('discord.js')
+const db = require("electron-db")
+
+const path = require("path")
 const fs = require("fs")
 
 const Util = require("./lib/util")
@@ -16,7 +19,7 @@ const client = new Client({ intents: [
 client.features = new Map()
 
 // Quand le client est prêt ...
-client.once('ready', () => {
+client.once("ready", () => {
 	console.log(`Logged in as ${client.user.tag}`)
 	// Initialisation des features
 	const featuresFolders = fs.readdirSync("./features/").filter((file) => !file.includes("."))
@@ -29,6 +32,20 @@ client.once('ready', () => {
 			client.features.get(featureName).set(feature.name, feature)
 		}
 	}
+	// Interval features
+	setInterval(() => {
+		client.features.get("intervals").each((interval) => {
+			if (!interval.disabled) {
+				if (Util.isItTime(interval.when)) {
+					try {
+						interval.execute(client)
+					} catch (err) {
+						console.error(err)
+					}
+				}
+			}
+		})
+	}, 60000) // Correspond à une minute (60,000 milisec)
 })
 
 // Quand un message est envoyé ...
@@ -38,8 +55,13 @@ client.on("messageCreate", (msg) => {
 	// Match features
 	client.features.get("matches").each((match) => {
 		if (match.filter && msg.content.match(match.filter)) {
-			if (!match.disabled)
-				match.execute(client, msg)
+			if (!match.disabled) {
+				try {
+					match.execute(client, msg)
+				} catch (err) {
+					console.error(err)
+				}
+			}
 		}
 	})
 	// Command features
@@ -53,11 +75,11 @@ client.on("messageCreate", (msg) => {
         if (command) {
 			try {
 				if (command.channelType && !command.channelType.some(value => value === msg.channel.type)) // Vérifie si la commande permet d'être utilisée dans ce salon
-					throw new PermissionCommandError(`Vous ne pouvez pas exécuter cette commande dans ce salon`)
+					throw new PermissionCommandError("Vous ne pouvez pas exécuter cette commande dans ce salon")
 				
 				if (msg.channel.type !== "dm") { // Vérifie si le message est envoyé dans le salon d'un serveur
 					if (command.permission === "admin" && !msg.member.hasPermission("ADMINISTRATOR")) // Vérifie si la commande permet d'être seulement utilisée par les admin et si l'utilisateur est un admin
-						throw new PermissionCommandError(`Vous devez avoir les droits administrateurs pour exécuter cette commande`)
+						throw new PermissionCommandError("Vous devez avoir les droits administrateurs pour exécuter cette commande")
 				}
 				
 				if (!command.disabled)

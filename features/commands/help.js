@@ -2,12 +2,12 @@ const { prefix, color } = require("../../config.json")
 
 module.exports = {
     name: "help",
+    aliases: ["info"],
     disabled: false,
     permission: "everyone",
     channelType: ["GUILD_TEXT", "DM"],
-    aliases: ["info"],
-    usage: `help`,
-    description: `Affiche les informations de toutes les commandes`,
+    usage: "help",
+    description: "Affiche les informations de toutes les commandes",
     execute: (client, msg, args) => {
 
         const fields = []
