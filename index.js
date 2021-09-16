@@ -52,18 +52,6 @@ client.once("ready", () => {
 client.on("messageCreate", (msg) => {
 	if (msg.author.id == client.user.id)
 		return
-	// Match features
-	client.features.get("matches").each((match) => {
-		if (match.filter && msg.content.match(match.filter)) {
-			if (!match.disabled) {
-				try {
-					match.execute(client, msg)
-				} catch (err) {
-					console.error(err)
-				}
-			}
-		}
-	})
 	// Command features
 	if (msg.content.trim().startsWith(prefix)) {
 		const args = msg.content.slice(prefix.length).trim().split(/ +/)
@@ -87,8 +75,21 @@ client.on("messageCreate", (msg) => {
 			} catch (err) {
 				Util.report(msg, err)
 			}
+			return
 		}
 	}
+	// Match features
+	client.features.get("matches").each((match) => {
+		if (match.filter && msg.content.match(match.filter)) {
+			if (!match.disabled) {
+				try {
+					match.execute(client, msg)
+				} catch (err) {
+					console.error(err)
+				}
+			}
+		}
+	})
 })
 
 // Connexion à Discord avec le token
