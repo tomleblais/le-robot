@@ -1,0 +1,29 @@
+{
+    "features": {
+        "matches": {
+            "badwords": {
+                "replies": [
+                    "surveille ton langage wesh",
+                    "ça va pas de parler comme ça",
+                    "utilise pas des mots comme ça d'vant moi",
+                    "des fois j'me demande qui t'a éduqué",
+                    "parle mieux, on verra après",
+                    "oh sur un autre ton stp",
+                    "comment il parle lui",
+                    "tu parles comme ça chez toi ? nan ? alors ici c'est pareil",
+                    "j't'ai pas éduqué comme ça moi"
+                ]
+            },
+            "UPPER": {
+                "replies": [
+                    "baisse d'un ton, tu veux ?",
+                    "parle moins fort, on verra après",
+                    "calme ta joie wesh",
+                    "ça va pas de crier dans les oreilles",
+                    "Haut parleur mais pas beau parleur hein",
+                    "tu te crois où pour crier comme ça"
+                ]
+            }
+        }
+    }
+}
