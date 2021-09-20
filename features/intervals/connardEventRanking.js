@@ -27,6 +27,8 @@ module.exports = {
 
             const rank = []
             db.getRows("connards", location, { guildId: guild.id}, (succ, rows) => {
+                if (!succ)
+                    return
                 rows.forEach(row => {
                     score = row.scores.filter(score => score.date == monthYear)
                     if (score.length) {
@@ -39,12 +41,12 @@ module.exports = {
             })
 
             rank.sort((a, b) => {
-                b.points - a.points
+                a.points - b.points
             })
 
             var description = []
             rank.forEach((score, i) => {
-                description.push(`${Util.numberToEmote(i + 1)} <@!${score.userId}> avec **${score.points} point${score.points > 1 ? "s" : ""}**`)
+                description.push(`${Util.digitsToEmotes(i + 1).join("")} <@!${score.userId}> avec **${score.points} point${score.points > 1 ? "s" : ""}**`)
             })
 
             if (description.length > 0) {

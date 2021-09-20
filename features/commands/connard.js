@@ -27,7 +27,7 @@ module.exports = {
         }
         // Vérifie si il est l'heure d'utiliser la commande
         if (!Util.isItTime(when, now))
-            return Util.report(msg, new CommandError("tu peux pas utiliser cette commande, attends 19h"))
+            return Util.report(msg, new CommandError("tu peux pas utiliser cette commande, attends 21h"))
         
         // Vérifie si le membre a spécifié un membre
         const member = Util.getMemberFromMention(args[0], msg)
@@ -105,8 +105,7 @@ module.exports = {
                 }
                 Util.report(msg, "ton vote a bien été pris en compte")
             })
-        } else {
+        } else
             return Util.report(msg, "mec t'as déjà voté")
-        }
     }
 }
