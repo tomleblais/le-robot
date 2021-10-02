@@ -12,7 +12,7 @@ module.exports = {
     when: {
         hours: 21,
         minutes: 1,
-        date: 0
+        date: 3
     },
     execute: (client) => {
 
