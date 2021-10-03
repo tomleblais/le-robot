@@ -17,7 +17,9 @@ module.exports = {
     execute: (client) => {
 
         const now = new Date()
-        const monthYear = `${now.getFullYear()}-${now.getMonth()}`
+        let month = now.getMonth() - 1 != -1 ? now.getMonth() - 1 : 11
+        let year = now.getMonth() - 1 == -1 ? now.getFullYear() - 1 : now.getFullYear()
+        const monthYear = `${year}-${month}`
 
         client.guilds.cache.each(guild => {
 
